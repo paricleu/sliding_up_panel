@@ -214,7 +214,6 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
     with SingleTickerProviderStateMixin {
   bool _isDragEnabled = true;
 
-  late AnimationController _ac;
   late ScrollController _sc;
 
   AnimationController? _ac;
@@ -363,7 +362,7 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
 
                       // header
                       widget.header != null
-                          ? Positioned(
+                          ? Positioned.fill(
                               top: widget.slideDirection == SlideDirection.UP
                                   ? 0.0
                                   : null,
@@ -658,8 +657,9 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
   Future<void> _animatePanelToSnapPoint(
       {Duration? duration, Curve curve = Curves.linear}) {
     assert(widget.snapPoint != null);
-    return _ac?.animateTo(widget.snapPoint!, duration: duration, curve: curve)
-        ?? Future.value();
+    return _ac?.animateTo(widget.snapPoint!,
+            duration: duration, curve: curve) ??
+        Future.value();
   }
 
   //set the panel position to value - must
